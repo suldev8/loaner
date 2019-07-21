@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'loans/index'
+  get 'loans/show'
+  get 'loans/edit'
+  get 'loans/new'
   get 'items/index'
   get 'items/show'
   get 'items/edit'
