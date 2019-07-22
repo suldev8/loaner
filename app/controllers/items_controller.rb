@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  
+  before_action :is_owner, only: [:new, :create, :edit, :update, :destroy]
   def index
     puts params
     @items = Item.where(user_id: params[:user_id])
@@ -44,6 +44,9 @@ class ItemsController < ApplicationController
 
 
   private
+    def is_owner
+      redirect_to root_path unless current_user.id == params[:user_id].to_i
+    end
     def set_item
       @item = Item.find(params[:id])
     end
