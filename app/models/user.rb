@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :items, dependent: :destroy
-  has_many :loans
+  has_many :loans, dependent: :destroy
   
   validates :name, presence: true
   # Include default devise modules. Others available are:
