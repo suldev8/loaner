@@ -2,6 +2,8 @@
     <%= link_to 'Loaner', root_path, class: "navbar-brand" %>
     <div class="d-flex flex-row">
     <% if user_signed_in? %>
+        <%= link_to 'In requests', in_requests_path, class: "nav-link"%>
+        <%= link_to 'Out requests', out_requests_path, class: "nav-link"%>
         <%= link_to 'My items', user_items_path(current_user) , class: "nav-link" %>
         <%= link_to 'Account', edit_user_registration_path, class: "nav-link" %>
         <%= link_to 'Logout', destroy_user_session_path, class: "btn btn-outline-primary ml-3", method: :delete %>

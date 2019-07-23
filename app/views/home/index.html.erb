@@ -5,14 +5,26 @@
 <div class="row mt-5">
 <% @items.each do |item| %>
 
-<% if current_user.id != item.user_id %>
+<% user_id = current_user ? current_user.id : nil %>
+<% newLoanUrl = current_user ? user_loans_path(current_user) :  new_user_session_path %>
+
+<% if user_id != item.user_id %>
     <div class="col-sm-4"> 
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title"><%= item.name %></h5>
                 <p class="card-text">from <%= item.user.name%></p>
-                    <%= link_to 'Borrow', '#', class: "btn btn-primary" %>
-                    <%= link_to '', user_item_path(user_id: item.user_id, id: item.id) , class: "stretched-link" %>
+                <%= link_to 'Show item', user_item_path(user_id: item.user_id, id: item.id) , class: "" %>
+
+                    <%= form_for Loan.new, url: newLoanUrl do |f| %>
+                        <%= f.hidden_field :item_id, value: item.id %>
+                        <% if Loan.find_by(user_id: user_id, item_id: item.id) %>
+                            <%= f.submit 'Requested', class: "btn btn-primary", disabled: true %>
+                        <% else %>
+                            <%= f.submit 'Borrow', class: "btn btn-primary" %>
+                        <%end%>
+                    <% end %>
+                    
                 <% end %>
             </div>
         </div>

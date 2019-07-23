@@ -1,2 +1,23 @@
-<h1>Loans#index</h1>
-<p>Find me in app/views/loans/index.html.erb</p>
+<table>
+    <thead>
+        <tr>
+            <th>name</th>
+            <th>item</th>
+            <th>user</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @loans.each do |i| %>
+        <tr>
+            <td><%= i.status %></td>
+            <td><%= i.item.name %></td>
+            <td><%= i.user.name %></td>
+            <td> <%= link_to 'Show', user_loan_path(id: i.id) %> </td>
+            <td> <%= link_to 'Edit', edit_user_loan_path(id: i.id) %> </td>
+            <td> <%= link_to 'Delete', user_loan_path(id: i.id), method: :delete %> </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= link_to 'New loan', new_user_loan_path(current_user) %>
