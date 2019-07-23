@@ -1,23 +1,18 @@
-<table>
-    <thead>
-        <tr>
-            <th>name</th>
-            <th>loaned</th>
-            <th>user</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @items.each do |i| %>
-        <tr>
-            <td><%= i.name %></td>
-            <td><%= i.loaned %></td>
-            <td><%= i.user.name %></td>
-            <td> <%= link_to 'Show', user_item_path(id: i.id) %> </td>
-            <td> <%= link_to 'Edit', edit_user_item_path(id: i.id) %> </td>
-            <td> <%= link_to 'Delete', user_item_path(id: i.id), method: :delete %> </td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+<div class="container">
+<h1>My items</h1>
 
 <%= link_to 'New Item', new_user_item_path(current_user) %>
+<div class="row mt-5">
+<% @items.each do |item| %>
+<div class="col-sm-4"> 
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><%= item.name %></h5>
+            <%= link_to '', user_item_path(id: item) , class: "stretched-link" %>
+        </div>
+    </div>
+</div>
+<% end %>
+</div>
+</div>
+
