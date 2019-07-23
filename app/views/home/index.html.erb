@@ -1,2 +1,22 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="container">
+
+<h1>Items</h1>
+
+<div class="row mt-5">
+<% @items.each do |item| %>
+
+<% if current_user.id != item.user_id %>
+    <div class="col-sm-4"> 
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title"><%= item.name %></h5>
+                <p class="card-text">from <%= item.user.name%></p>
+                    <%= link_to 'Borrow', '#', class: "btn btn-primary" %>
+                    <%= link_to '', user_item_path(user_id: item.user_id, id: item.id) , class: "stretched-link" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>
+</div>
