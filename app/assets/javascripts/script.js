@@ -1,1 +1,1 @@
-$(_ => console.log("It works"))
+setTimeout(() => $('#alert').hide(), 2000)
