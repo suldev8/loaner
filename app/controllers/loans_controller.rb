@@ -15,6 +15,13 @@ class LoansController < ApplicationController
 
   def changest
     @loan = Loan.find(params[:id])
+    puts (params[:status])
+    puts (params[:status] == 'Accepted')
+    if params[:status] == 'Accepted'
+      @loan.item.update_attribute(:loaned, true)
+    else
+      @loan.item.update_attribute(:loaned, false)
+    end
     @loan.update_attribute(:status, params[:status])
     @loan.save
     redirect_to request.referrer
