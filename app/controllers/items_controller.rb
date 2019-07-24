@@ -27,9 +27,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = current_user.items.new(item_params)
-
-    if @item.save
+    
+    #@item = current_user.items.create!(item_params)
+  
+    # if @item.save
+    if  current_user.items.create!(item_params)
       redirect_to user_items_path(current_user)
     else
       puts "can't save"
@@ -51,6 +53,6 @@ class ItemsController < ApplicationController
       @item = Item.find(params[:id])
     end
     def item_params
-      params.require(:item).permit(:name)
+      params.require(:item).permit(:name, :image)
     end
 end

@@ -1,12 +1,17 @@
 
 <%= form_for item, url: url do |f| %>
 
-<div class="form-group">
-<%= f.label :name %>
-<%= f.text_field :name, class: "form-control" %>
-</div>
+    <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+    </div>
 
-<div class="form-group">
-<%= f.submit item.id ? "Update" : "Add new item", class: "btn btn-primary" %>
-</div>
+    <div class="form-group">
+        <%= f.label :image %>
+        <%= f.file_field :image, class: "btn btn-info" %>
+    </div>
+
+    <div class="form-group">
+        <%= f.submit item.id ? "Update" : "Add new item", class: "btn btn-primary" %>
+    </div>
 <% end %>
