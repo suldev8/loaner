@@ -6,7 +6,7 @@
 <% @items.each do |item| %>
 
 <% user_id = current_user ? current_user.id : nil %>
-<% newLoanUrl = current_user ? user_loans_path(current_user) :  new_user_session_path %>
+<% newLoanUrl = current_user ? user_loans_path(current_user) :  nil %>
 
 <% if user_id != item.user_id %>
     <div class="col-sm-4"> 
@@ -20,7 +20,7 @@
                 <h5 class="card-title"><%= item.name %></h5>
                 <p class="card-text">from <%= item.user.name%></p>
                 <%= link_to 'Show item', user_item_path(user_id: item.user_id, id: item.id) , class: "" %>
-
+                <% if user_signed_in? %>
                     <%= form_for Loan.new, url: newLoanUrl do |f| %>
                         <%= f.hidden_field :item_id, value: item.id %>
                         <% if Loan.find_by(user_id: user_id, item_id: item.id) %>
@@ -29,6 +29,8 @@
                             <%= f.submit 'Borrow', class: "btn btn-primary" %>
                         <%end%>
                     <% end %>
+                <% end %>
+                            <%= link_to 'Borrow', new_user_session_path, class: "btn btn-primary d-block w-100" %>
                     
                 <% end %>
             </div>
